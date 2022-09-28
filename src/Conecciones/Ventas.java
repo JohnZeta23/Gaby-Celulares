@@ -6,12 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
-
-import ClasesAbstractas.AgregarOVender;
 import Formularios.Menu;
 
 
-public class Ventas implements AgregarOVender{
+public class Ventas{
 	
 	public int ID;
 	int Cantidad;

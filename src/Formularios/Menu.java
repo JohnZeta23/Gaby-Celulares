@@ -259,7 +259,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormAgregar window = new FormAgregar();
+							FormAgregarCelulares window = new FormAgregarCelulares();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -278,7 +278,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormAgregar2 window = new FormAgregar2();
+							FormAgregarAccesorios window = new FormAgregarAccesorios();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -296,7 +296,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormAgregar3 window = new FormAgregar3();
+							FormAgregarNuevosProductos window = new FormAgregarNuevosProductos();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);

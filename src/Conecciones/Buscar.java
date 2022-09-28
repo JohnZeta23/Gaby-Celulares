@@ -7,8 +7,8 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import Formularios.FormAgregar;
-import Formularios.FormAgregar2;
+import Formularios.FormAgregarCelulares;
+import Formularios.FormAgregarAccesorios;
 import Formularios.FormVenta;
 import Formularios.FormVenta2;
 import Formularios.Menu;
@@ -207,7 +207,7 @@ public class Buscar {
 				{
 					if(resultset.absolute(i)) 
 					{
-						FormAgregar.ProductoCB.addItem(resultset.getString("Nombre"));
+						FormAgregarCelulares.ProductoCB.addItem(resultset.getString("Nombre"));
 					
 					}
 				}
@@ -283,7 +283,7 @@ public class Buscar {
 				{
 					if(resultset.absolute(i)) 
 					{
-						FormAgregar2.ProductoCB.addItem(resultset.getString("Producto"));
+						FormAgregarAccesorios.ProductoCB.addItem(resultset.getString("Producto"));
 					
 					}
 				}

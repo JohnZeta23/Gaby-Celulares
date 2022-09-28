@@ -6,7 +6,7 @@ public interface AgregarOVender {
 	int Cantidad = 0;
 	public int Precio = 0;
 	
-	public void Query(String marca, String producto, int cantidad);
+	public void AumentarCantidadCelulares(String marca, String producto, int cantidad);
 	
-	public void Query2(String marca, String producto, int cantidad);
+	public void AumentarCantidadAccesorios(String marca, String producto, int cantidad);
 }

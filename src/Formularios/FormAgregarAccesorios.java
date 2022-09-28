@@ -18,13 +18,13 @@ import ClasesAbstractas.Iniciador;
 import Conecciones.Agregar;
 import Conecciones.Buscar;
 
-public class FormAgregar2 implements Iniciador{
+public class FormAgregarAccesorios implements Iniciador{
 
 	 JInternalFrame frame;
 	 public static JComboBox<String> ProductoCB;
 	 private JTextField CantidadCB;
 
-	public FormAgregar2() {
+	public FormAgregarAccesorios() {
 		initialize();
 	}
 
@@ -98,7 +98,7 @@ public class FormAgregar2 implements Iniciador{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			Agregar conection = new Agregar();
-			conection.Query2(MarcaCB.getSelectedItem().toString(), ProductoCB.getSelectedItem().toString(),Integer.parseInt(CantidadCB.getText()));
+			conection.AumentarCantidadAccesorios(MarcaCB.getSelectedItem().toString(), ProductoCB.getSelectedItem().toString(),Integer.parseInt(CantidadCB.getText()));
 			}
 		});
 		
