@@ -105,7 +105,7 @@ public class FormHistorial implements Iniciador{
 				Menu.tabadd.addRow(Menu.filas);
 				
 				Buscar conection = new Buscar();
-				conection.Query7(FechaMTF.getText());
+				conection.BuscarHistorial(FechaMTF.getText());
 				
 				Menu.LabelTabla.setText("Resultados del historial de ventas");
 				

@@ -91,7 +91,7 @@ public class FormAgregarCelulares implements Iniciador{
 				
 			Buscar conection = new Buscar();
 			
-			conection.Query4(MarcaCB.getSelectedItem().toString());
+			conection.AgregarCelulares(MarcaCB.getSelectedItem().toString());
 			}
 		});
 		

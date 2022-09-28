@@ -13,12 +13,12 @@ import javax.swing.JTextField;
 import ClasesAbstractas.Iniciador;
 import Conecciones.Buscar;
 
-public class FormHistorial2 implements Iniciador{
+public class FormBuscarVenta implements Iniciador{
 
 	JInternalFrame frame;
 	JTextField CodigoTF;
 
-	public FormHistorial2() {
+	public FormBuscarVenta() {
 		initialize();
 	}
 	
@@ -91,7 +91,7 @@ public class FormHistorial2 implements Iniciador{
 				Menu.tabadd.addRow(Menu.filas);
 				
 				Buscar conection = new Buscar();
-				conection.Query8(Integer.parseInt(CodigoTF.getText()));
+				conection.BuscarCompraPorCodigo(Integer.parseInt(CodigoTF.getText()));
 				
 				Menu.LabelTabla.setText("Resultados del historial de ventas");
 			}

@@ -18,13 +18,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 
-public class FormVenta2 implements Iniciador{
+public class FormVentaAccesorios implements Iniciador{
 
 	JInternalFrame frame;
 	private JTextField CantidadCB;
 	public static JComboBox<String> ProductoCB;
 	
-	public FormVenta2() {
+	public FormVentaAccesorios() {
 		initialize();
 	}
 
@@ -88,7 +88,7 @@ public class FormVenta2 implements Iniciador{
 				
 			Buscar conection = new Buscar();
 			
-			conection.Query5(MarcaCB.getSelectedItem().toString());
+			conection.BuscarAccesorios(MarcaCB.getSelectedItem().toString());
 			}
 		});
 		
@@ -107,7 +107,7 @@ public class FormVenta2 implements Iniciador{
 				Menu.tabadd.addRow(Menu.filas);	
 				
 			Ventas conection = new Ventas();
-			conection.Query2(MarcaCB.getSelectedItem().toString(), ProductoCB.getSelectedItem().toString(),Integer.parseInt(CantidadCB.getText()));
+			conection.VenderAccesorios(MarcaCB.getSelectedItem().toString(), ProductoCB.getSelectedItem().toString(),Integer.parseInt(CantidadCB.getText()));
 			
 			int ITBIS = (conection.Precio*18)/100;
 		
@@ -122,7 +122,5 @@ public class FormVenta2 implements Iniciador{
 			Menu.LabelTabla.setText("Cuentas por cobrar");
 			}
 		});
-		
-		
 	}
 }

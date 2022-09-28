@@ -2,26 +2,30 @@ package Formularios;
 
 import java.awt.Color;
 import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import ClasesAbstractas.Iniciador;
-import Conecciones.Buscar;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class FormBuscar implements Iniciador{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+
+import ClasesAbstractas.Iniciador;
+import Conecciones.Buscar;
+import javax.swing.JTextField;
+
+public class FormBuscarPorCodigo implements Iniciador{
 
 	JInternalFrame frame;
+	private JTextField CodigoTF;
 
-	public FormBuscar() {
+	public FormBuscarPorCodigo() {
 		initialize();
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
 	public void initialize() {
 		frame = new JInternalFrame();
 		frame.setBounds(10, 33, 416, 252);
@@ -35,19 +39,12 @@ public class FormBuscar implements Iniciador{
 		lblVenderCelulares.setBounds(89, 11, 254, 42);
 		frame.getContentPane().add(lblVenderCelulares);
 		
-		JLabel lblMarca = new JLabel("Marca");
+		JLabel lblMarca = new JLabel("C\u00F3digo");
 		lblMarca.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblMarca.setBounds(61, 94, 75, 14);
+		lblMarca.setBounds(61, 94, 75, 19);
 		frame.getContentPane().add(lblMarca);
-		
-		JComboBox<String> MarcaCB = new JComboBox<String>();
-		MarcaCB.setBounds(148, 92, 111, 22);
-		frame.getContentPane().add(MarcaCB);
 		frame.setBounds(100, 100, 414, 252);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MarcaCB.addItem("Samsung");
-		MarcaCB.addItem("Apple");
-		MarcaCB.addItem("Xiaomi");
 		
 		JButton BuscarBT = new JButton("Buscar");
 		BuscarBT.setBackground(Color.ORANGE);
@@ -56,12 +53,17 @@ public class FormBuscar implements Iniciador{
 		BuscarBT.setBounds(148, 180, 111, 31);
 		frame.getContentPane().add(BuscarBT);
 		
+		CodigoTF = new JTextField();
+		CodigoTF.setBounds(146, 93, 113, 20);
+		frame.getContentPane().add(CodigoTF);
+		CodigoTF.setColumns(10);
+		
 		BuscarBT.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+					
 				Menu.tabadd.setRowCount(0);
-				
+
 				Menu.filas[0]= "Codigo"; 
 				Menu.filas[1]= "Producto";
 				Menu.filas[2]= "Marca";
@@ -71,11 +73,10 @@ public class FormBuscar implements Iniciador{
 				Menu.tabadd.addRow(Menu.filas);
 				
 				Buscar conection = new Buscar();
-				conection.Query(MarcaCB.getSelectedItem().toString());
+				conection.BuscarProductosPorCodigo(Integer.parseInt(CodigoTF.getText()));
 				
 				Menu.LabelTabla.setText("Resultados de búsqueda");
 			}
 		});
-
 	}
 }

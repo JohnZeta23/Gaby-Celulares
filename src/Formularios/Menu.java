@@ -184,7 +184,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormVenta window = new FormVenta();
+							FormVentaCelulares window = new FormVentaCelulares();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -203,7 +203,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormVenta2 window = new FormVenta2();
+							FormVentaAccesorios window = new FormVentaAccesorios();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -222,7 +222,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormBuscar window = new FormBuscar();
+							FormBuscarPorMarca window = new FormBuscarPorMarca();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -240,7 +240,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormBuscar2 window = new FormBuscar2();
+							FormBuscarPorCodigo window = new FormBuscarPorCodigo();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -332,7 +332,7 @@ public class Menu implements Iniciador{
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							FormHistorial2 window = new FormHistorial2();
+							FormBuscarVenta window = new FormBuscarVenta();
 							window.frame.setVisible(true);
 							panel.removeAll();
 							panel.add(window.frame);
@@ -390,13 +390,13 @@ public class Menu implements Iniciador{
 					if(Factura == 1) 
 					{
 						Ventas conection = new Ventas();
-						conection.Query3();
+						conection.FacturarCelulares();
 					}
 					
 					else 
 					{
 						Ventas conection = new Ventas();
-						conection.Query4();
+						conection.FacturarAccesorios();
 					}
 		
 				}

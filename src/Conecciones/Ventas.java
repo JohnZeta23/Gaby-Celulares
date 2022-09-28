@@ -1,32 +1,23 @@
 package Conecciones;
 
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import javax.swing.JOptionPane;
 import Formularios.Menu;
 
-
 public class Ventas{
 	
+	Conection conection = new Conection();
 	public int ID;
 	int Cantidad;
 	public int Precio;
 	public int filas;
 	public int numero;
 	
-	public void Query(String marca, String producto, int cantidad) {
+	public void VenderCelulares(String marca, String producto, int cantidad) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			java.sql.Connection conexion = 
-					DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendacelulares","root", "");
 			
-			
-			Statement statement = conexion.createStatement();
-			
-			ResultSet resultset = statement.executeQuery("select * from productos where Marca = '"+marca+"'and Nombre = '"+producto+"'");
+			ResultSet resultset = conection.statement().executeQuery("select * from productos where Marca = '"+marca+"'and Nombre = '"+producto+"'");
 			
 			if(resultset.first()) {
 			if(resultset.getInt("Cantidad") <= 0) 
@@ -49,9 +40,9 @@ public class Ventas{
 			
 			String fecha = date.toString();
 			
-			statement.executeUpdate("insert into cuentasporpagar values("+numero+",'"+producto+"','"+fecha+"',"+Precio*cantidad+","+cantidad+")");
+			conection.statement().executeUpdate("insert into cuentasporpagar values("+numero+",'"+producto+"','"+fecha+"',"+Precio*cantidad+","+cantidad+")");
 			
-			ResultSet resultset2 = statement.executeQuery("select * from cuentasporpagar");
+			ResultSet resultset2 = conection.statement().executeQuery("select * from cuentasporpagar");
 			
 			if(resultset2.first()) {
 				filas = resultset2.getRow();	
@@ -74,12 +65,8 @@ public class Ventas{
 				}
 			}
 		}
-			conexion.close();
-	
-		} catch(ClassNotFoundException o) 
-		{
-			o.printStackTrace();
-		} 
+			conection.ConnectionClose();
+		}
 		
 		catch(SQLException l) 
 		{
@@ -88,16 +75,9 @@ public class Ventas{
 		
 	}
 	
-	public void Query2(String marca, String producto, int cantidad) {
+	public void VenderAccesorios(String marca, String producto, int cantidad) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			java.sql.Connection conexion = 
-					DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendacelulares","root", "");
-			
-			
-			Statement statement = conexion.createStatement();
-			
-			ResultSet resultset = statement.executeQuery("select * from accesorios where Marca = '"+marca+"'and Producto = '"+producto+"'");
+			ResultSet resultset = conection.statement().executeQuery("select * from accesorios where Marca = '"+marca+"'and Producto = '"+producto+"'");
 			
 			if(resultset.first()) {
 			if(resultset.getInt("Cantidad") <= 0) 
@@ -117,14 +97,13 @@ public class Ventas{
 			long millis=System.currentTimeMillis();  
 			java.sql.Date date=new java.sql.Date(millis);   
 			String fecha = date.toString();
-			statement.executeUpdate("insert into cuentasporpagar values("+numero+",'"+producto+"','"+fecha+"',"+Precio*cantidad+","+cantidad+")");
+			conection.statement().executeUpdate("insert into cuentasporpagar values("+numero+",'"+producto+"','"+fecha+"',"+Precio*cantidad+","+cantidad+")");
 			
-			ResultSet resultset2 = statement.executeQuery("select * from cuentasporpagar");
+			ResultSet resultset2 = conection.statement().executeQuery("select * from cuentasporpagar");
 			
 			if(resultset2.first()) {
 				filas = resultset2.getRow();	
 				
-		
 					for (int i = 0; i <= filas; i++) 
 					{
 						if(resultset2.absolute(i)) 
@@ -137,31 +116,22 @@ public class Ventas{
 							Menu.tabadd.addRow(Menu.filas);
 						
 						}
-					}
-					
+					}	
 				}
 			}
 		}
-			conexion.close();
+			conection.ConnectionClose();
 	
-		} catch(ClassNotFoundException o) 
-		{
-			o.printStackTrace();
-		} 
+		}
 		
 		catch(SQLException l) 
 		{
 			l.printStackTrace();
 		}
-		
 	}
 	
-	public void Query3() {
+	public void FacturarCelulares() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			java.sql.Connection conexion = 
-					DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendacelulares","root", "");
-			
 			
 			int ID_Codigo = 0;
 			String Producto = "";
@@ -170,16 +140,14 @@ public class Ventas{
 			int cantidad = 0;
 			int canti = 0;
 			
-			Statement statement = conexion.createStatement();
-			
-			ResultSet resultset = statement.executeQuery("select * from productos");
+			ResultSet resultset = conection.statement().executeQuery("select * from productos");
 			if(resultset.first()) 
 			{
 			ID = resultset.getInt("ID_Producto");
 			canti = resultset.getInt("Cantidad");
 			}
 			
-			ResultSet resultset2 = statement.executeQuery("select * from cuentasporpagar");
+			ResultSet resultset2 = conection.statement().executeQuery("select * from cuentasporpagar");
 			
 			if(resultset2.first()) {
 				ID_Codigo = resultset2.getInt("ID_Codigo");
@@ -190,33 +158,25 @@ public class Ventas{
 				Cantidad = canti - cantidad;
 			}
 				
-			statement.executeUpdate("update productos set Cantidad = '"+Cantidad+"' where ID_Producto = '"+ID+"'");
+			conection.statement().executeUpdate("update productos set Cantidad = '"+Cantidad+"' where ID_Producto = '"+ID+"'");
 			
-			statement.executeUpdate("insert into historial values("+ID_Codigo+",'"+Producto+"','"+fecha+"',"+Precio+","+cantidad+")");
+			conection.statement().executeUpdate("insert into historial values("+ID_Codigo+",'"+Producto+"','"+fecha+"',"+Precio+","+cantidad+")");
 			
-			statement.executeUpdate("Delete from cuentasporpagar where ID_codigo = "+ID_Codigo+"");
+			conection.statement().executeUpdate("Delete from cuentasporpagar where ID_codigo = "+ID_Codigo+"");
 			
 			String Mensaje = "Venta realizada existosamente";
 			JOptionPane.showMessageDialog(null, Mensaje);
 			
-			conexion.close();
-	
-		} catch(ClassNotFoundException o) 
-		{
-			o.printStackTrace();
-		} 
-		
+			conection.ConnectionClose();
+		}
 		catch(SQLException l) 
 		{
 			l.printStackTrace();
 		}
 	}
 	
-	public void Query4() {
+	public void FacturarAccesorios() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			java.sql.Connection conexion = 
-					DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendacelulares","root", "");
 			
 			int ID_Codigo = 0;
 			String Producto = "";
@@ -225,16 +185,14 @@ public class Ventas{
 			int cantidad = 0;
 			int canti = 0;
 			
-			Statement statement = conexion.createStatement();
-			
-			ResultSet resultset = statement.executeQuery("select * from accesorios");
+			ResultSet resultset = conection.statement().executeQuery("select * from accesorios");
 			if(resultset.first()) 
 			{
 			ID = resultset.getInt("ID_Accesorio");
 			canti = resultset.getInt("Cantidad");
 			}
 			
-			ResultSet resultset2 = statement.executeQuery("select * from cuentasporpagar");
+			ResultSet resultset2 = conection.statement().executeQuery("select * from cuentasporpagar");
 			
 			if(resultset2.first()) {
 				ID_Codigo = resultset2.getInt("ID_Codigo");
@@ -245,21 +203,17 @@ public class Ventas{
 				Cantidad = canti - cantidad;
 			}
 			
-			statement.executeUpdate("update accesorios set Cantidad = '"+Cantidad+"' where ID_Accesorio = '"+ID+"'");
+			conection.statement().executeUpdate("update accesorios set Cantidad = '"+Cantidad+"' where ID_Accesorio = '"+ID+"'");
 			
-			statement.executeUpdate("insert into historial values("+ID_Codigo+",'"+Producto+"','"+fecha+"',"+Precio+","+cantidad+")");
+			conection.statement().executeUpdate("insert into historial values("+ID_Codigo+",'"+Producto+"','"+fecha+"',"+Precio+","+cantidad+")");
 			
-			statement.executeUpdate("Delete from cuentasporpagar where ID_codigo = "+ID_Codigo+"");
+			conection.statement().executeUpdate("Delete from cuentasporpagar where ID_codigo = "+ID_Codigo+"");
 			
 			String Mensaje = "Venta realizada existosamente";
 			JOptionPane.showMessageDialog(null, Mensaje);
 			
-			conexion.close();
-	
-		} catch(ClassNotFoundException o) 
-		{
-			o.printStackTrace();
-		} 
+			conection.ConnectionClose();
+		}
 		
 		catch(SQLException l) 
 		{

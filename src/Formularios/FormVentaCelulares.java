@@ -17,13 +17,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
-public class FormVenta implements Iniciador{
+public class FormVentaCelulares implements Iniciador{
 
 	 JInternalFrame frame;
 	 public static JComboBox<String> ProductoCB;
 	 private JTextField CantidadCB;
 	 
-	 public FormVenta() {
+	 public FormVentaCelulares() {
 		initialize();
 	}
 
@@ -89,7 +89,7 @@ public class FormVenta implements Iniciador{
 				
 			Buscar conection = new Buscar();
 			
-			conection.Query3(MarcaCB.getSelectedItem().toString());
+			conection.BuscarCelulares(MarcaCB.getSelectedItem().toString());
 			}
 		});
 		
@@ -108,7 +108,7 @@ public class FormVenta implements Iniciador{
 				Menu.tabadd.addRow(Menu.filas);
 				
 			Ventas conection = new Ventas();
-			conection.Query(MarcaCB.getSelectedItem().toString(), ProductoCB.getSelectedItem().toString(),Integer.parseInt(CantidadCB.getText()));
+			conection.VenderCelulares(MarcaCB.getSelectedItem().toString(), ProductoCB.getSelectedItem().toString(),Integer.parseInt(CantidadCB.getText()));
 			
 			int ITBIS = (conection.Precio*18)/100;
 			

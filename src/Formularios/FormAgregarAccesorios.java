@@ -90,7 +90,7 @@ public class FormAgregarAccesorios implements Iniciador{
 				
 			Buscar conection = new Buscar();
 			
-			conection.Query6(MarcaCB.getSelectedItem().toString());
+			conection.AgregarAccesorios(MarcaCB.getSelectedItem().toString());
 			}
 		});
 		
